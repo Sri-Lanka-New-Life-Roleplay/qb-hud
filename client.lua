@@ -65,7 +65,7 @@ local function loadSettings(settings)
             SendNUIMessage({ test = true, event = k, toggle = v})
         end
     end
-    QBCore.Functions.Notify(Lang:t("notify.hud_settings_loaded"), "success")
+    QBCore.Functions.Notify("HUD Settings Loaded!", "success")
     TriggerEvent("hud:client:LoadMap")
 end
 
@@ -116,7 +116,7 @@ RegisterKeyMapping('menu', 'Open Menu', 'keyboard', Config.OpenMenu)
 -- Reset hud
 local function restartHud()
     TriggerEvent("hud:client:playResetHudSounds")
-    QBCore.Functions.Notify(Lang:t("notify.hud_restart"), "error")
+    QBCore.Functions.Notify("HUD Is Restarting!", "error")
     if IsPedInAnyVehicle(PlayerPedId()) then
         Wait(2600)
         SendNUIMessage({ action = 'car', show = false })
@@ -126,7 +126,7 @@ local function restartHud()
     SendNUIMessage({ action = 'hudtick', show = false })
     SendNUIMessage({ action = 'hudtick', show = true })
     Wait(2600)
-    QBCore.Functions.Notify(Lang:t("notify.hud_start"), "success")
+    QBCore.Functions.Notify("HUD Is Now Started!", "success")
 end
 
 RegisterNUICallback('restartHud', function()
@@ -305,7 +305,7 @@ RegisterNetEvent("hud:client:LoadMap", function()
             Wait(200)
         end
         if Menu.isMapNotifChecked then
-            QBCore.Functions.Notify(Lang:t("notify.load_square_map"))
+            QBCore.Functions.Notify("Square Map Loading!")
         end
         SetMinimapClipType(0)
         AddReplaceTexture("platform:/textures/graphics", "radarmasksm", "squaremap", "radarmasksm")
@@ -334,7 +334,7 @@ RegisterNetEvent("hud:client:LoadMap", function()
         end
         Wait(1200)
         if Menu.isMapNotifChecked then
-            QBCore.Functions.Notify(Lang:t("notify.loaded_square_map"))
+            QBCore.Functions.Notify("Square Map Has Loaded!")
         end
     elseif Menu.isToggleMapShapeChecked == "circle" then
         RequestStreamedTextureDict("circlemap", false)
@@ -342,7 +342,7 @@ RegisterNetEvent("hud:client:LoadMap", function()
             Wait(200)
         end
         if Menu.isMapNotifChecked then
-            QBCore.Functions.Notify(Lang:t("notify.load_circle_map"))
+            QBCore.Functions.Notify("Circle Map Loading!")
         end
         SetMinimapClipType(1)
         AddReplaceTexture("platform:/textures/graphics", "radarmasksm", "circlemap", "radarmasksm")
@@ -371,7 +371,7 @@ RegisterNetEvent("hud:client:LoadMap", function()
         end
         Wait(1200)
         if Menu.isMapNotifChecked then
-            QBCore.Functions.Notify(Lang:t("notify.loaded_circle_map"))
+            QBCore.Functions.Notify("Circle Map Has Loaded!")
         end
     end
 end)
@@ -424,14 +424,14 @@ RegisterNUICallback('cinematicMode', function()
         CinematicShow(false)
         Menu.isCineamticModeChecked = false
         if Menu.isCinematicNotifChecked then
-            QBCore.Functions.Notify(Lang:t("notify.cinematic_off"), 'error')
+            QBCore.Functions.Notify("Cinematic Mode Off!", 'error')
         end
         DisplayRadar(1)
     else
         CinematicShow(true)
         Menu.isCineamticModeChecked = true
         if Menu.isCinematicNotifChecked then
-            QBCore.Functions.Notify(Lang:t("notify.cinematic_on"))
+            QBCore.Functions.Notify("Cinematic Mode On!")
         end
     end
     TriggerEvent("hud:client:playHudChecklistSound")
@@ -484,14 +484,14 @@ RegisterCommand('+engine', function()
     local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
     if vehicle == 0 or GetPedInVehicleSeat(vehicle, -1) ~= PlayerPedId() then return end
     if GetIsVehicleEngineRunning(vehicle) then
-        QBCore.Functions.Notify(Lang:t("notify.engine_off"))
+        QBCore.Functions.Notify("Engine Shut Down!")
     else
-        QBCore.Functions.Notify(Lang:t("notify.engine_on"))
+        QBCore.Functions.Notify("Engine Started!")
     end
     SetVehicleEngineOn(vehicle, not GetIsVehicleEngineRunning(vehicle), false, true)
 end)
 
-RegisterKeyMapping('+engine', 'Toggle Engine', 'keyboard', 'G')
+--RegisterKeyMapping('+engine', 'Toggle Engine', 'keyboard', 'P')
 
 local function IsWhitelistedWeaponArmed(weapon)
     if weapon then
@@ -756,7 +756,7 @@ CreateThread(function()
                 if exports['LegacyFuel']:GetFuel(GetVehiclePedIsIn(ped, false)) <= 20 then -- At 20% Fuel Left
                     if Menu.isLowFuelChecked then
                         TriggerServerEvent("InteractSound_SV:PlayOnSource", "pager", 0.10)
-                        QBCore.Functions.Notify(Lang:t("notify.low_fuel"), "error")
+                        QBCore.Functions.Notify("Fuel Level Low!", "error")
                         Wait(60000) -- repeats every 1 min until empty
                     end
                 end

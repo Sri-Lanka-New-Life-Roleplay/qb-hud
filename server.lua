@@ -17,7 +17,7 @@ QBCore.Commands.Add("dev", "Enable/Disable developer Mode", {}, false, function(
     if QBCore.Functions.HasPermission(source, 'admin') then
 	    TriggerClientEvent("qb-admin:client:ToggleDevmode", source)
     else
-        TriggerClientEvent('QBCore:Notify', source, Lang:t("notify.access_denied"), 'error')
+        TriggerClientEvent('QBCore:Notify', source, "You Are Not Authorized!", 'error')
     end
 end)
 
@@ -40,7 +40,7 @@ RegisterNetEvent('hud:server:GainStress', function(amount)
     end
     Player.Functions.SetMetaData('stress', newStress)
     TriggerClientEvent('hud:client:UpdateStress', src, newStress)
-    TriggerClientEvent('QBCore:Notify', src, Lang:t("notify.stress_gain"), 'error', 1500)
+    TriggerClientEvent('QBCore:Notify', src, "Feeling More Stressed!", 'error', 1500)
 end)
 
 RegisterNetEvent('hud:server:RelieveStress', function(amount)
@@ -62,7 +62,7 @@ RegisterNetEvent('hud:server:RelieveStress', function(amount)
     end
     Player.Functions.SetMetaData('stress', newStress)
     TriggerClientEvent('hud:client:UpdateStress', src, newStress)
-    TriggerClientEvent('QBCore:Notify', src, Lang:t("notify.stress_removed"))
+    TriggerClientEvent('QBCore:Notify', src, "Feeling More Relaxed!")
 end)
 
 QBCore.Functions.CreateCallback('hud:server:getMenu', function(source, cb)

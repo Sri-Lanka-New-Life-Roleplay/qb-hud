@@ -115,7 +115,7 @@ div#openmenu {
 /* Vehicle HUD */
 
 speed:after {
-  content: "MPH"; /* If using KPH change this content from MPH */
+  content: "KPH"; /* If using KPH change this content from MPH */
   display: block;
   padding-top: 3px;
   padding-left: 2px;
