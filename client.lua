@@ -66,6 +66,7 @@ local function loadSettings(settings)
         end
     end
     QBCore.Functions.Notify("HUD Settings Loaded!", "success")
+    Wait(1000)
     TriggerEvent("hud:client:LoadMap")
 end
 
